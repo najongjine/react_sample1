@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AppInitializer from "./components/AppInitializer";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Counter from "./pages/counter/Counter";
@@ -14,6 +15,7 @@ import ListSample from "./pages/list_sample/ListSample";
 // 이 라우트는 브라우저의 주소가 /counter일 때 <Counter /> 컴포넌트를 렌더링합니다.
 const App: React.FC = () => (
   <Router>
+    <AppInitializer />
     <MainLayout>
       <Routes>
         <Route path="/" element={<Home />} />

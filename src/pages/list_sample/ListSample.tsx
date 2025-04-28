@@ -3,7 +3,7 @@ import CardList from "../../components/CardList";
 
 const sampleCardData = [
   {
-    image: "https://static.wikia.nocookie.net/elderscrolls/images/6/6f/Frostcrag_Spire.png/revision/latest?cb=20130103095915",
+    image: "https://64.media.tumblr.com/1d816583f2bfe171b27f632dcacef5f3/tumblr_o2h23eqoIv1qflgwpo1_1280.jpg",
     title: "위자드 캐슬",
     episodes: "총 221화",
     author: "테프크리",
