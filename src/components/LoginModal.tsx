@@ -13,7 +13,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -27,13 +27,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess
         body: JSON.stringify({ username, password }),
       });
 
-      const data = await response.json();
+      const data = await response?.json();
+      console.log(`## data:`, data);
 
       if (data?.success) {
         onLoginSuccess(data?.user);
         onClose();
       } else {
-        setError(data?.message || "로그인 실패");
+        setError(`아이디나 비밀번호가 잘못됬습니다. \n ${data?.message ?? ""}`);
       }
     } catch (err) {
       setError("서버 오류가 발생했습니다.");
@@ -46,7 +47,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess
     <div className="modal-overlay">
       <div className="modal">
         <h2>로그인</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleLoginSubmit}>
           <label>
             사용자명:
             <input type="text" value={username} onChange={(e) => setUsername(e?.target?.value)} required />
