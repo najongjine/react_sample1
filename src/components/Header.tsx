@@ -1,31 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../store/AuthStore";
+import { useLogin_Logout } from "../hooks/useLoginLogout";
 import LoginModal from "./LoginModal";
 
 const Header: React.FC = () => {
+  const { handleLogout, error } = useLogin_Logout();
   const { user, setUser, logout } = useAuthStore();
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-
-      const data = await response.json();
-      if (data.success) {
-        logout();
-        navigate("/"); // 로그아웃 후 홈으로 이동
-      } else {
-        alert("Logout failed");
-      }
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
-  };
 
   return (
     <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -47,7 +30,7 @@ const Header: React.FC = () => {
           <button onClick={() => setLoginModalOpen(true)}>Login</button>
         )}
       </div>
-      <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} onLoginSuccess={setUser} />
+      <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
     </header>
   );
 };

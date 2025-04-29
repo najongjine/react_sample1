@@ -1,18 +1,17 @@
 // src/components/LoginModal.tsx
 import React, { useState } from "react";
 import "./LoginModal.css";
-import { useLogin } from "../hooks/useLogin";
+import { useLogin_Logout } from "../hooks/useLoginLogout";
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLoginSuccess: (user: any) => void;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess }) => {
+const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login, error } = useLogin(onLoginSuccess);
+  const { login, error } = useLogin_Logout();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
