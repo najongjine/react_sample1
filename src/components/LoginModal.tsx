@@ -1,6 +1,7 @@
 // src/components/LoginModal.tsx
 import React, { useState } from "react";
 import "./LoginModal.css";
+import { useLogin } from "../hooks/useLogin";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -11,33 +12,13 @@ interface LoginModalProps {
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const { login, error } = useLogin(onLoginSuccess);
 
-  const handleLoginSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-
-    try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // 세션 쿠키 포함
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response?.json();
-      console.log(`## data:`, data);
-
-      if (data?.success) {
-        onLoginSuccess(data?.user);
-        onClose();
-      } else {
-        setError(`아이디나 비밀번호가 잘못됬습니다. \n ${data?.message ?? ""}`);
-      }
-    } catch (err) {
-      setError("서버 오류가 발생했습니다.");
+    const result = await login(username, password);
+    if (result.success) {
+      onClose();
     }
   };
 
@@ -47,7 +28,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess
     <div className="modal-overlay">
       <div className="modal">
         <h2>로그인</h2>
-        <form onSubmit={handleLoginSubmit}>
+        <form onSubmit={handleSubmit}>
           <label>
             사용자명:
             <input type="text" value={username} onChange={(e) => setUsername(e?.target?.value)} required />
