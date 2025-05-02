@@ -12,7 +12,7 @@ export function useLogin_Logout() {
     setError("");
 
     try {
-      const response = await fetch(`${process?.env?.NODE_ENV ?? ""}/auth/login`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export function useLogin_Logout() {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch(`${process?.env?.NODE_ENV ?? ""}/auth/logout`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

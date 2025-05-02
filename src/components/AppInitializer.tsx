@@ -10,7 +10,7 @@ const AppInitializer: React.FC = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`${process?.env?.NODE_ENV ?? ""}/auth/current-user`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/current-user`, {
           method: "GET",
           credentials: "include",
         });
