@@ -27,21 +27,3 @@ const useAuthStore = create<AuthState>()(
 );
 
 export default useAuthStore;
-
-/**
-import useAuthStore from './authStore';
-
-const handleLogin = async () => {
-  const response = await fetch('/api/login', {
-    method: 'POST',
-    body: JSON.stringify({ username, password }),
-    headers: { 'Content-Type': 'application/json' },
-  });
-
-  const data = await response.json();
-
-  if (data.success) {
-    useAuthStore.getState().setUser(data.user);
-  }
-};
- */

@@ -12,7 +12,7 @@ export function useLogin_Logout() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
+      const response = await fetch(`${process?.env?.NODE_ENV ?? ""}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,11 +21,11 @@ export function useLogin_Logout() {
         body: JSON.stringify({ username, password }),
       });
 
-      const data = await response.json();
+      const data = await response?.json();
       console.log(`## data:`, data);
 
       if (data?.success) {
-        setUser(data.user);
+        setUser(data?.user);
         return { success: true };
       } else {
         setError(`아이디나 비밀번호가 잘못되었습니다.\n${data?.message ?? ""}`);
@@ -39,7 +39,7 @@ export function useLogin_Logout() {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:3000/auth/logout", {
+      const response = await fetch(`${process?.env?.NODE_ENV ?? ""}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });
