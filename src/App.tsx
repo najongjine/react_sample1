@@ -5,6 +5,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Counter from "./pages/counter/Counter";
 import ListSample from "./pages/list_sample/ListSample";
+import Miliseconds from "./pages/miliseconds/Miliseconds";
 
 // App은 React의 함수형 컴포넌트입니다. 이 컴포넌트는 애플리케이션의 최상위 컴포넌트로, 전체 애플리케이션의 구조를 정의합니다.
 // Router는 react-router-dom에서 제공하는 컴포넌트로, 브라우저의 주소(URL)와 React 애플리케이션을 연결해주는 역할을 합니다. 이 컴포넌트로 감싸진 내부에서는 라우팅 기능을 사용할 수 있습니다.​
@@ -21,6 +22,7 @@ const App: React.FC = () => (
         <Route path="/" element={<Home />} />
         <Route path="/counter" element={<Counter />} />
         <Route path="/list_sample" element={<ListSample />} />
+        <Route path="/miliseconds" element={<Miliseconds />} />
       </Routes>
     </MainLayout>
   </Router>

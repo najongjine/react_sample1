@@ -15,7 +15,8 @@ const Header: React.FC = () => {
       <div>
         <h1>My App</h1>
         <nav>
-          <Link to="/">Home</Link> | <Link to="/counter">Counter</Link> | <Link to="/list_sample">List Sample</Link>
+          <Link to="/">Home</Link> | <Link to="/counter">Counter</Link> | <Link to="/list_sample">List Sample</Link>|{" "}
+          <Link to="/miliseconds">miliseconds</Link>
         </nav>
       </div>
       <div style={{ float: "right" }}>
